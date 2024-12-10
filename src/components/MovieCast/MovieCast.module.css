@@ -1,0 +1,26 @@
+.cast {
+  color: brown;
+}
+
+.castList {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}
+@media only screen and (min-width: 768px) {
+  .castList {
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0;
+    justify-content: space-between;
+  }
+}
+.castItem {
+  max-width: 288px;
+}
+
+.logo {
+  max-width: 100%;
+}

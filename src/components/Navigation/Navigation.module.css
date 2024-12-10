@@ -1,0 +1,20 @@
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.link {
+  background-color: #8585e7;
+  padding: 20px 40px;
+  border-radius: 10px;
+  color: #12021f;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.active {
+  background-color: #80c480;
+  color: #12021f;
+}

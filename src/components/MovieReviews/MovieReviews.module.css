@@ -1,0 +1,15 @@
+.reviewsList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.reviewItem {
+  background-color: rgb(183, 156, 209);
+  border-radius: 20px;
+  color: #030303;
+  width: 100%;
+  text-align: left;
+  padding: 0 20px;
+  min-height: 100px;
+}
