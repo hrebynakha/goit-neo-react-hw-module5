@@ -1,26 +1,26 @@
 import { useEffect, useState } from "react";
 import MovieList from "../../components/MovieList/MovieList";
-import { getTrands } from "../../utils/api/trends";
+import { getMovieTrands } from "../../utils/api/trends";
 
 const HomePage = () => {
-  const [trandsMovies, setTrandsMovies] = useState([]);
+  const [moviesTrands, setMoviesTrands] = useState([]);
   useEffect(() => {
-    const fetchTrandsMovies = async () => {
+    const fetchMoviesTrands = async () => {
       try {
-        const { results } = await getTrands();
-        setTrandsMovies(results);
+        const { results } = await getMovieTrands();
+        setMoviesTrands(results);
       } catch {
         console.error("oops");
       } finally {
         console.log("Done");
       }
     };
-    fetchTrandsMovies();
-  }, [trandsMovies]);
+    fetchMoviesTrands();
+  }, [moviesTrands]);
   return (
     <div>
       <h1> Tranding movies today </h1>
-      <MovieList movies={trandsMovies} />
+      <MovieList movies={moviesTrands} />
     </div>
   );
 };
