@@ -2,28 +2,35 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { searchMovie } from "../../utils/api/search";
 import MovieList from "../../components/MovieList/MovieList";
+import Loader from "../../components/Loader/Loader";
+import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
+
+import css from "./MoviesPage.module.css";
 
 const MoviesPage = () => {
   const [movies, setMovies] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams("");
   const query = searchParams.get("query");
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     if (query === "") {
-      console.log("query not deifned");
       return;
     }
     const fetchMovie = async () => {
+      setIsLoading(true);
+      setIsError(false);
       try {
         const { results } = await searchMovie(query);
         setMovies(results);
       } catch {
-        console.error("oops");
+        setIsError(true);
       } finally {
-        console.log("Done");
+        setIsLoading(false);
       }
     };
-    if (query) fetchMovie();
+    fetchMovie();
   }, [query]);
 
   const handleSubmit = (e) => {
@@ -34,12 +41,20 @@ const MoviesPage = () => {
   };
   return (
     <div>
-      MoviePage
-      <form onSubmit={handleSubmit}>
-        <input type="text" name="query" />
-        <button type="submit">Search</button>
+      {isLoading && <Loader />}
+      {isError && <ErrorMessage />}
+      <form onSubmit={handleSubmit} className={css.form}>
+        <input type="text" name="query" className={css.input} />
+        <button type="submit" className={css.btn}>
+          Search
+        </button>
       </form>
-      {movies ? <MovieList movies={movies} /> : <h1>Not found any movie</h1>}
+      {movies.length > 0 ? (
+        <MovieList movies={movies} isSearch={true} />
+      ) : (
+        query &&
+        !isLoading && <ErrorMessage msg="Not found any movie by this request" />
+      )}
     </div>
   );
 };

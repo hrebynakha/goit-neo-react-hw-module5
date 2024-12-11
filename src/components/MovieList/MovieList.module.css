@@ -1,0 +1,23 @@
+.list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 48px;
+  background-color: #211e24;
+  border-radius: 12px;
+  padding: 20px 10px;
+}
+
+.list.search {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 20px;
+}
+
+.item.search {
+  width: 100%;
+  max-width: 288px;
+  flex-grow: 1;
+}

@@ -1,8 +1,12 @@
+:root {
+  --font-family: "Montserrat", serif;
+}
+
 body {
-  font-family: "Montserrat", serif;
+  font-family: var(--font-family);
   line-height: 1.5;
   margin: 0;
-  background: linear-gradient(#171957, #f4f5f5);
+  background: linear-gradient(#171957, #488860);
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;

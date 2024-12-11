@@ -1,28 +1,38 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getMovieCredits } from "../../utils/api/credits";
+import Loader from "../Loader/Loader";
+import ToTopBtn from "../ToTopBtn/ToTopBtn";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import css from "./MovieCast.module.css";
 const baseUrl = import.meta.env.VITE_MOVIE_IMG_BASE_URL;
+const defaultImg = import.meta.env.VITE_MOVIE_IMG_DEFAULT;
+
 const MovieCast = () => {
   const { movieId } = useParams();
-  // console.log(params);
-  const [cast, setCast] = useState(0);
-
+  const [cast, setCast] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
   useEffect(() => {
     const getCast = async () => {
+      setIsLoading(true);
+      setIsError(false);
       try {
         const { cast } = await getMovieCredits(movieId);
         setCast(cast);
       } catch {
-        console.error("oops");
+        setIsError(true);
       } finally {
-        console.log("Done");
+        setIsLoading(false);
       }
     };
     getCast();
   }, [movieId]);
   return (
     <div>
+      <ToTopBtn />
+      {isLoading && <Loader />}
+      {isError && <ErrorMessage />}
       {cast ? (
         <div className={css.cast}>
           <ul className={css.castList}>
@@ -30,19 +40,19 @@ const MovieCast = () => {
               return (
                 <li className={css.castItem} key={c.id}>
                   <img
-                    src={baseUrl + c.profile_path}
+                    src={c.profile_path ? baseUrl + c.profile_path : defaultImg}
                     alt={c.name}
                     className={css.logo}
                   />
-                  <h3>{c.name}</h3>
-                  <p>Charter: {c.character}</p>
+                  <h3 className={css.title}>{c.name}</h3>
+                  <p className={css.desc}>Charter: {c.character}</p>
                 </li>
               );
             })}
           </ul>
         </div>
       ) : (
-        <h1>Not found any cast info</h1>
+        !isLoading && <ErrorMessage msg="Not found any cast info" />
       )}
     </div>
   );
