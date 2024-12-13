@@ -29,7 +29,11 @@ const HomePage = () => {
       <h1 className={css.title}> Tranding movies today </h1>
       {isLoading && <Loader />}
       {isError && <ErrorMessage />}
-      <MovieList movies={moviesTrands} />
+      {moviesTrands.length > 0 ? (
+        <MovieList movies={moviesTrands} />
+      ) : (
+        <ErrorMessage msg="Not found any trand movies..:(" />
+      )}
     </div>
   );
 };
