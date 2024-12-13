@@ -14,6 +14,7 @@ const MovieCast = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   useEffect(() => {
+    if (!movieId) return;
     const getCast = async () => {
       setIsLoading(true);
       setIsError(false);

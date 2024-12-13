@@ -3,9 +3,9 @@ import css from "./BackLink.module.css";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 import { IconContext } from "react-icons";
 
-const BackLink = ({ to, defaultPath, children }) => {
+const BackLink = ({ to, children }) => {
   return (
-    <Link to={to ?? defaultPath} className={css.link}>
+    <Link to={to} className={css.link}>
       <IconContext.Provider value={{ color: "white", size: "25px" }}>
         <IoArrowBackCircleOutline />
       </IconContext.Provider>

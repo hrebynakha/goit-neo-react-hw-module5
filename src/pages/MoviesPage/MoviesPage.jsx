@@ -4,8 +4,7 @@ import { searchMovie } from "../../utils/api/search";
 import MovieList from "../../components/MovieList/MovieList";
 import Loader from "../../components/Loader/Loader";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
-
-import css from "./MoviesPage.module.css";
+import SearchForm from "../../components/SearchForm/SearchForm";
 
 const MoviesPage = () => {
   const [movies, setMovies] = useState([]);
@@ -31,27 +30,19 @@ const MoviesPage = () => {
     if (query != null) fetchMovie();
   }, [query]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const form = e.currentTarget;
-    if (form.elements.query.value) {
-      setSearchParams({ query: form.elements.query.value });
+  const handleSubmit = (value) => {
+    if (value) {
+      setSearchParams({ query: value });
     } else {
-      searchParams.delete(query);
+      searchParams.delete("query");
       setSearchParams(searchParams);
     }
-    form.reset();
   };
   return (
     <div>
       {isLoading && <Loader />}
       {isError && <ErrorMessage />}
-      <form onSubmit={handleSubmit} className={css.form}>
-        <input type="text" name="query" className={css.input} />
-        <button type="submit" className={css.btn}>
-          Search
-        </button>
-      </form>
+      <SearchForm onSubmit={handleSubmit} />
       {movies.length > 0 ? (
         <MovieList movies={movies} isSearch={true} />
       ) : (

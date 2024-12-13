@@ -12,7 +12,7 @@ const MovieDetailsPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const location = useLocation();
-  const back = useRef(location.state);
+  const back = useRef(location.state ?? "/movies");
   useEffect(() => {
     const getMovie = async () => {
       setIsLoading(true);
@@ -32,7 +32,7 @@ const MovieDetailsPage = () => {
     <div>
       {isLoading && <Loader />}
       {isError && <ErrorMessage />}
-      <BackLink to={back.current} defaultPath="/movies" />
+      <BackLink to={back.current} />
       {movie ? <MovieCard movie={movie} /> : !isLoading && <ErrorMessage />}
     </div>
   );
