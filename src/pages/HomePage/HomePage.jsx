@@ -4,6 +4,7 @@ import { getMovieTrands } from "../../utils/api/trends";
 import Loader from "../../components/Loader/Loader";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import css from "./HomePage.module.css";
+
 const HomePage = () => {
   const [moviesTrands, setMoviesTrands] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -17,6 +18,7 @@ const HomePage = () => {
         const { results } = await getMovieTrands();
         setMoviesTrands(results);
       } catch {
+        setMoviesTrands([]);
         setIsError(true);
       } finally {
         setIsLoading(false);
