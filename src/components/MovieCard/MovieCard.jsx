@@ -43,8 +43,8 @@ const MovieCard = ({ movie }) => {
             </Link>
           </li>
           <li>
-            <Link to="review" className={css.link}>
-              Review
+            <Link to="reviews" className={css.link}>
+              Reviews
             </Link>
           </li>
         </ul>
