@@ -1,40 +1,40 @@
 import { useEffect, useState } from "react";
 import MovieList from "../../components/MovieList/MovieList";
-import { getMovieTrands } from "../../utils/api/trends";
+import { getMovieTrends } from "../../utils/api/trends";
 import Loader from "../../components/Loader/Loader";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import css from "./HomePage.module.css";
 
 const HomePage = () => {
-  const [moviesTrands, setMoviesTrands] = useState([]);
+  const [moviesTrends, setMoviesTrends] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
-    const fetchMoviesTrands = async () => {
+    const fetchMoviesTrends = async () => {
       setIsLoading(true);
       setIsError(false);
       try {
-        const { results } = await getMovieTrands();
+        const { results } = await getMovieTrends();
         if (!results) throw new Error("Not found any movies.");
-        setMoviesTrands(results);
+        setMoviesTrends(results);
       } catch {
         setIsError(true);
       } finally {
         setIsLoading(false);
       }
     };
-    fetchMoviesTrands();
+    fetchMoviesTrends();
   }, []);
   return (
     <div>
-      <h1 className={css.title}> Tranding movies today </h1>
+      <h1 className={css.title}> Trending movies today </h1>
       {isLoading && <Loader />}
       {isError && <ErrorMessage />}
-      {moviesTrands.length > 0 ? (
-        <MovieList movies={moviesTrands} />
+      {moviesTrends.length > 0 ? (
+        <MovieList movies={moviesTrends} />
       ) : (
-        !isLoading && <ErrorMessage msg="Not found any trand movies..:(" />
+        !isLoading && <ErrorMessage msg="Not found any Trend movies..:(" />
       )}
     </div>
   );
