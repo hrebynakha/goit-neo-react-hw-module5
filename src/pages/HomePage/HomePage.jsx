@@ -34,7 +34,7 @@ const HomePage = () => {
       {moviesTrands.length > 0 ? (
         <MovieList movies={moviesTrands} />
       ) : (
-        <ErrorMessage msg="Not found any trand movies..:(" />
+        !isLoading && <ErrorMessage msg="Not found any trand movies..:(" />
       )}
     </div>
   );
