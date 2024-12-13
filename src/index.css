@@ -6,7 +6,7 @@ body {
   font-family: var(--font-family);
   line-height: 1.5;
   margin: 0;
-  background: linear-gradient(#171957, #488860);
+  background: linear-gradient(#171957, #0c0c0c);
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;

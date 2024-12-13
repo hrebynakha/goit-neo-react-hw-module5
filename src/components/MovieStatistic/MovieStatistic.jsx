@@ -9,7 +9,7 @@ const MovieStatistic = ({
   popularity,
   average,
   count,
-  color = "#12021F",
+  color = "green",
   size = "25px",
 }) => {
   return (

@@ -36,7 +36,12 @@ const MoviesPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.currentTarget;
-    setSearchParams({ query: form.elements.query.value });
+    if (form.elements.query.value) {
+      setSearchParams({ query: form.elements.query.value });
+    } else {
+      searchParams.delete(query);
+      setSearchParams(searchParams);
+    }
     form.reset();
   };
   return (
