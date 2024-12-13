@@ -23,6 +23,7 @@ const MoviesPage = () => {
       setIsError(false);
       try {
         const { results } = await searchMovie(query);
+        if (!results) throw new Error("Not found any movies.");
         setMovies(results);
       } catch {
         setIsError(true);

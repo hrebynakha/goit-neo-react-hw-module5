@@ -16,9 +16,9 @@ const HomePage = () => {
       setIsError(false);
       try {
         const { results } = await getMovieTrands();
+        if (!results) throw new Error("Not found any movies.");
         setMoviesTrands(results);
       } catch {
-        setMoviesTrands([]);
         setIsError(true);
       } finally {
         setIsLoading(false);
