@@ -15,9 +15,6 @@ const MoviesPage = () => {
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
-    if (query === "") {
-      return;
-    }
     const fetchMovie = async () => {
       setIsLoading(true);
       setIsError(false);
@@ -31,7 +28,7 @@ const MoviesPage = () => {
         setIsLoading(false);
       }
     };
-    fetchMovie();
+    if (query != null) fetchMovie();
   }, [query]);
 
   const handleSubmit = (e) => {
